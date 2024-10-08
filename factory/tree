@@ -1,0 +1,13 @@
+.
+├── cpp
+├── go
+├── node
+├── python
+│   ├── docker-compose.yml
+│   ├── Dockerfile
+│   ├── flask_app
+│   │   └── app.py
+│   └── requirements.txt
+└── tree
+
+5 directories, 5 files

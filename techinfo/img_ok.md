@@ -67,6 +67,7 @@ RUN composer global require laravel/installer
 * redis                     Redis is the world’s fastest data platform f…   12975     [OK]    :6
 * mongo                     MongoDB document databases provide high avai…   10357     [OK]    :4.4  
 * mongo-express             Web-based MongoDB admin interface, written w…   1463      [OK]
+* rethinkdb                 RethinkDB is an open-source, document databa…   629       [OK]
 * opentsdb/opentsdb         Opensource Time Series Database                 18 
 * openlink/virtuoso-opensource-7 OpenLink Virtuoso Open Source Editionv7.2, 12 
 

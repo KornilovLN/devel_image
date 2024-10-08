@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  go_dev:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#      target: go_develop
+    image: go-develop
+    ports:
+      - "5001:8080"  # Порт для веб-интерфейса приложения
+    volumes:
+      - ./app:/go/src/app  # Монтирование исходного кода приложения
+      - ./shared_folder:/go/shared_folder  # Общая папка для обмена файлами между хостом и контейнером
+    environment:
+      - GO_ENV=development
+      - GOVERSION=1.21.5
+    networks:
+      - app_network
+    tty: true  # Позволяет держать контейнер запущенным с интерактивным терминалом
+
+  # Здесь вы можете добавить другие сервисы, например, базы данных
+  # postgres:
+  #   image: postgres:13
+  #   environment:
+  #     POSTGRES_DB: myapp
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: password
+  #   networks:
+  #     - app_network
+
+  # mongodb:
+  #   image: mongo:5
+  #   networks:
+  #     - app_network
+
+  # redis:
+  #   image: redis:6
+  #   networks:
+  #     - app_network
+
+networks:
+  app_network:
+    driver: bridge

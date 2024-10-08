@@ -1,0 +1,8 @@
+.
+├── app
+├── docker-compose.yml
+├── Dockerfile
+├── shared_folder
+└── tree
+
+2 directories, 3 files

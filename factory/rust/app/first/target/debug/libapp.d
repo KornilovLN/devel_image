@@ -1,0 +1,1 @@
+/home/rustuser/app/first/target/debug/libapp.rlib: /home/rustuser/app/first/mylib/src/lib.rs /home/rustuser/app/first/src/lib.rs /home/rustuser/app/first/src/modules/mod.rs /home/rustuser/app/first/src/modules/module1.rs /home/rustuser/app/first/src/modules/module2.rs

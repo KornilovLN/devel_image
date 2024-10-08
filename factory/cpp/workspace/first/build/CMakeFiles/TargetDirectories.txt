@@ -1,0 +1,3 @@
+/workspace/first/build/CMakeFiles/main.dir
+/workspace/first/build/CMakeFiles/edit_cache.dir
+/workspace/first/build/CMakeFiles/rebuild_cache.dir

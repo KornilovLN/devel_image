@@ -1,0 +1,11 @@
+RUN pip3 install Flask \
+    Flask-Bootstrap \
+    Flask-WTF \
+    Flask-SQLAlchemy \
+    Flask-Migrate \
+    Flask-Login \
+    Flask-RESTful \
+    Flask-CORS \
+    Flask-Caching \
+    Flask-DebugToolbar \
+    Flask-Mail

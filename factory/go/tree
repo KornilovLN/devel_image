@@ -1,0 +1,14 @@
+.
+├── app
+│   ├── go.mod
+│   ├── handlers
+│   │   └── todo_handlers.go
+│   ├── main.go
+│   └── models
+│       └── todo.go
+├── docker-compose.yml
+├── Dockerfile
+├── shared_folder
+└── tree
+
+4 directories, 7 files

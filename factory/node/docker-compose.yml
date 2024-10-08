@@ -1,0 +1,29 @@
+# docker-compose down
+# docker-compose up --build
+
+version: '3.8'
+
+services:
+  node_dev:
+    container_name: node_develop
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: node_dev
+    image: node-develop-img
+    ports:
+      - "5003:5003"
+    volumes:
+      - ./app:/app
+      - ./shared_folder:/shared_folder
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app_network
+    working_dir: /app/first
+    command: bash -c "npm install && npm start"
+
+networks:
+  app_network:
+    driver: bridge
+
