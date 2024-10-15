@@ -75,7 +75,7 @@ echo "--
 2. Создать файл inventory.yml для подключения к удаленному серверу на 192.168.88.101
 ```
 [mongodb]
-192.168.88.101 ansible_user=starmark ansible_password=!18leon28 ansible_become=yes ansible_become_method=sudo ansible_become_password=!18leon28
+192.168.88.101 ansible_user=<user-nik> ansible_password=<user-pwd> ansible_become=yes ansible_become_method=sudo ansible_become_password=<user-pwd>
 
 ```
 
