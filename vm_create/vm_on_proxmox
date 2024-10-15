@@ -1,0 +1,57 @@
+## Step-by-Step Guide
+
+1. Install Ansible: on your local machine.
+```
+sudo apt update
+sudo apt install ansible
+```
+
+2. Create an Ansible Inventory File:
+<br>This file will contain the connection details for your Proxmox server.
+
+3. Create a file named inventory.ini:
+```
+[proxmox]
+192.168.88.15 ansible_user=starmark ansible_password=4e8uRu55k@ ansible_become=yes ansible_become_method=sudo
+```
+
+4. Create an Ansible Playbook: This playbook will define the tasks to create and configure the VM.
+<br>Create a file named create_vm.yml:
+```
+---
+- name: Create and configure VM on Proxmox
+  hosts: proxmox
+  tasks:
+    - name: Create VM
+      proxmox_kvm:
+        api_user: "starmark@pve"
+        api_password: "4e8uRu55k@"
+        api_host: "192.168.88.15"
+        node: "MonDuck"  # Replace with your actual node name
+        vmid: 6005
+        name: "Devel"
+        memory: 8192
+        cores: 4
+        sockets: 1
+        disk: 400
+        storage: "local-lvm"  # Adjust storage as needed
+        iso: "local:iso/ubuntu-22.04.5-live-server-amd64.iso"  # Adjust ISO path as needed
+        net0: "virtio,bridge=vmbr0"
+        ostype: "l26"
+        onboot: true
+        boot: "cdn"
+        scsihw: "virtio-scsi-pci"
+        state: present
+```
+
+5. Установка sshpass
+```
+sudo apt update
+sudo apt install sshpass
+```
+
+6. Run the Ansible Playbook:
+<br>Execute the playbook to create the VM.
+```
+ansible-playbook -i inventory.ini create_vm.yml
+```

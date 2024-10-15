@@ -1,0 +1,47 @@
+---
+- name: Install MongoDB Docker Container
+  hosts: mongodb
+  become: yes
+  tasks:
+    - name: Ensure Docker is installed
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Ensure Docker is started
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Create Docker network
+      docker_network:
+        name: net_mongo
+        driver: bridge
+
+    - name: Pull MongoDB Docker image
+      docker_image:
+        name: mongo
+        tag: "5.0"
+        source: pull
+
+    - name: Run MongoDB container
+      docker_container:
+        name: mongodb
+        image: mongo:5.0
+        state: started
+        restart_policy: always
+        ports:
+          - "27017:27017"
+        networks:
+          - name: net_mongo
+        volumes:
+          - /data/db:/data/db
+
+    - name: Wait for MongoDB to start
+      wait_for:
+        host: "localhost"
+        port: 27017
+        delay: 10
+        timeout: 300

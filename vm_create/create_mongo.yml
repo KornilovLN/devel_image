@@ -1,0 +1,46 @@
+---
+- name: Install MongoDB on VM
+  hosts: mongodb
+  become: yes
+  vars:
+    mongodb_repo: "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse"
+    mongodb_key: "https://www.mongodb.org/static/pgp/server-5.0.asc"
+  tasks:
+    - name: Add MongoDB repository key
+      apt_key:
+        url: "{{ mongodb_key }}"
+        state: present
+
+    - name: Add MongoDB repository
+      apt_repository:
+        repo: "{{ mongodb_repo }}"
+        state: present
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install MongoDB
+      apt:
+        name: mongodb-org
+        state: present
+
+    - name: Start and enable MongoDB service
+      systemd:
+        name: mongod
+        state: started
+        enabled: yes
+
+    - name: Ensure MongoDB is listening on all interfaces
+      lineinfile:
+        path: /etc/mongod.conf
+        regexp: '^  bindIp:'
+        line: '  bindIp: 0.0.0.0'
+        state: present
+      notify: Restart MongoDB
+
+  handlers:
+    - name: Restart MongoDB
+      systemd:
+        name: mongod
+        state: restarted
