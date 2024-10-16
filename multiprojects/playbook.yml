@@ -1,0 +1,24 @@
+---
+- name: Set up Python environment on remote machine
+  hosts: python_system
+  become: yes
+
+  tasks:
+    - name: Check if python2system.sh exists
+      stat:
+        path: /tmp/python2system.sh
+      register: script_stat
+
+    - name: Debug script stat
+      debug:
+        var: script_stat
+
+    - name: Copy python2system.sh to remote machine
+      copy:
+        src: python2system.sh
+        dest: /tmp/python2system.sh
+        mode: '0755'
+
+    - name: Run python2system.sh
+      command: /tmp/python2system.sh
+
